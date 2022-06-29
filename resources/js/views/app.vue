@@ -1,8 +1,8 @@
 <template>
     <div>
         <bannerComponent />
-        <main>
-            <section class="posts py-5">
+        <main class="d-flex py-5">
+            <section class="posts">
                 <div class="container">
                     <div style="row-gap: 1.5rem;" class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                         <div class="col" v-for="post in posts" :key="post.id">
@@ -66,11 +66,19 @@
                 </div>
             </section>
             <aside>
-                <div class="widget">
+                <div class="widget bg-dark text-light m-2 p-3 rounded">
                     <h5>Categories</h5>
-                    <ul>
+                    <ul class="m-0">
                         <li v-for="category in categories" :key="category.id">
                             {{ category.name }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="widget bg-dark text-light m-2 p-3 rounded">
+                    <h5>Tags</h5>
+                    <ul class="m-0">
+                        <li v-for="tag in tags" :key="tag.id">
+                            {{ tag.name }}
                         </li>
                     </ul>
                 </div>
@@ -89,6 +97,7 @@ export default {
             posts: '',
             postResponse: '',
             categories: '',
+            tags: '',
         }
     },
     methods: {
@@ -114,12 +123,22 @@ export default {
                 }).catch((e) => {
                     console.log(e);
                 })
-        }
+        },
+        apiTagsCall() {
+            Axios.get('api/tags')
+                .then((response) => {
+                    console.log(response);
+                    this.tags = response.data
+                }).catch((e) => {
+                    console.log(e);
+                })
+        },
     },
     mounted() {
         console.log('mounted');
         this.apiPostsCall();
         this.apiCategoriesCall();
+        this.apiTagsCall();
     },
 }
 </script>

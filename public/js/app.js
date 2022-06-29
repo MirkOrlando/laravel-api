@@ -2016,6 +2016,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2027,7 +2035,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       posts: '',
       postResponse: '',
-      categories: ''
+      categories: '',
+      tags: ''
     };
   },
   methods: {
@@ -2055,12 +2064,23 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    apiTagsCall: function apiTagsCall() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/tags').then(function (response) {
+        console.log(response);
+        _this3.tags = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   },
   mounted: function mounted() {
     console.log('mounted');
     this.apiPostsCall();
     this.apiCategoriesCall();
+    this.apiTagsCall();
   }
 });
 
@@ -37700,8 +37720,8 @@ var render = function () {
     [
       _c("bannerComponent"),
       _vm._v(" "),
-      _c("main", [
-        _c("section", { staticClass: "posts py-5" }, [
+      _c("main", { staticClass: "d-flex py-5" }, [
+        _c("section", { staticClass: "posts" }, [
           _c("div", { staticClass: "container" }, [
             _c(
               "div",
@@ -37929,23 +37949,51 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("aside", [
-          _c("div", { staticClass: "widget" }, [
-            _c("h5", [_vm._v("Categories")]),
-            _vm._v(" "),
-            _c(
-              "ul",
-              _vm._l(_vm.categories, function (category) {
-                return _c("li", { key: category.id }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(category.name) +
-                      "\n                    "
-                  ),
-                ])
-              }),
-              0
-            ),
-          ]),
+          _c(
+            "div",
+            { staticClass: "widget bg-dark text-light m-2 p-3 rounded" },
+            [
+              _c("h5", [_vm._v("Categories")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "m-0" },
+                _vm._l(_vm.categories, function (category) {
+                  return _c("li", { key: category.id }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(category.name) +
+                        "\n                    "
+                    ),
+                  ])
+                }),
+                0
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "widget bg-dark text-light m-2 p-3 rounded" },
+            [
+              _c("h5", [_vm._v("Tags")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "m-0" },
+                _vm._l(_vm.tags, function (tag) {
+                  return _c("li", { key: tag.id }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(tag.name) +
+                        "\n                    "
+                    ),
+                  ])
+                }),
+                0
+              ),
+            ]
+          ),
         ]),
       ]),
     ],
