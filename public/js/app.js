@@ -2024,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2074,6 +2075,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    truncateText: function truncateText(text) {
+      if (text.length > 100) {
+        return text.slice(0, 100) + '...';
+      } else {
+        return text;
+      }
     }
   },
   mounted: function mounted() {
@@ -37748,9 +37756,10 @@ var render = function () {
                       _c("p", { staticClass: "card-text" }, [
                         _vm._v(
                           "\n                                    " +
-                            _vm._s(post.content) +
-                            "\n                                "
+                            _vm._s(_vm.truncateText(post.content)) +
+                            "\n                                    "
                         ),
+                        _c("a", { attrs: { href: "" } }, [_vm._v("See more")]),
                       ]),
                     ]),
                     _vm._v(" "),
@@ -37951,7 +37960,7 @@ var render = function () {
         _c("aside", [
           _c(
             "div",
-            { staticClass: "widget bg-dark text-light m-2 p-3 rounded" },
+            { staticClass: "widget bg-dark text-light mb-3 p-3 rounded" },
             [
               _c("h5", [_vm._v("Categories")]),
               _vm._v(" "),
@@ -37974,7 +37983,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "widget bg-dark text-light m-2 p-3 rounded" },
+            { staticClass: "widget bg-dark text-light mb-3 p-3 rounded" },
             [
               _c("h5", [_vm._v("Tags")]),
               _vm._v(" "),

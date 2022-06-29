@@ -11,7 +11,8 @@
                                 <div class="card-body">
                                     <h4 class="card-title">{{ post.title }}</h4>
                                     <p class="card-text">
-                                        {{ post.content }}
+                                        {{ truncateText(post.content) }}
+                                        <a href="">See more</a>
                                     </p>
                                 </div>
                                 <div class="card-footer">
@@ -66,7 +67,7 @@
                 </div>
             </section>
             <aside>
-                <div class="widget bg-dark text-light m-2 p-3 rounded">
+                <div class="widget bg-dark text-light mb-3 p-3 rounded">
                     <h5>Categories</h5>
                     <ul class="m-0">
                         <li v-for="category in categories" :key="category.id">
@@ -74,7 +75,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="widget bg-dark text-light m-2 p-3 rounded">
+                <div class="widget bg-dark text-light mb-3 p-3 rounded">
                     <h5>Tags</h5>
                     <ul class="m-0">
                         <li v-for="tag in tags" :key="tag.id">
@@ -133,6 +134,13 @@ export default {
                     console.log(e);
                 })
         },
+        truncateText(text) {
+            if (text.length > 100) {
+                return text.slice(0, 100) + '...'
+            } else {
+                return text
+            }
+        }
     },
     mounted() {
         console.log('mounted');
