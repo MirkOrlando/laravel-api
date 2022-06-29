@@ -2006,6 +2006,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2016,7 +2026,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: '',
-      postResponse: ''
+      postResponse: '',
+      categories: ''
     };
   },
   methods: {
@@ -2034,11 +2045,22 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    apiCategoriesCall: function apiCategoriesCall() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/categories').then(function (response) {
+        console.log(response);
+        _this2.categories = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   },
   mounted: function mounted() {
     console.log('mounted');
     this.apiPostsCall();
+    this.apiCategoriesCall();
   }
 });
 
@@ -37903,6 +37925,26 @@ var render = function () {
                 2
               ),
             ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("aside", [
+          _c("div", { staticClass: "widget" }, [
+            _c("h5", [_vm._v("Categories")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.categories, function (category) {
+                return _c("li", { key: category.id }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(category.name) +
+                      "\n                    "
+                  ),
+                ])
+              }),
+              0
+            ),
           ]),
         ]),
       ]),

@@ -65,6 +65,16 @@
                     </nav>
                 </div>
             </section>
+            <aside>
+                <div class="widget">
+                    <h5>Categories</h5>
+                    <ul>
+                        <li v-for="category in categories" :key="category.id">
+                            {{ category.name }}
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </main>
     </div>
 </template>
@@ -78,6 +88,7 @@ export default {
         return {
             posts: '',
             postResponse: '',
+            categories: '',
         }
     },
     methods: {
@@ -95,10 +106,20 @@ export default {
                     console.log(e);
                 })
         },
+        apiCategoriesCall() {
+            Axios.get('api/categories')
+                .then((response) => {
+                    console.log(response);
+                    this.categories = response.data
+                }).catch((e) => {
+                    console.log(e);
+                })
+        }
     },
     mounted() {
         console.log('mounted');
         this.apiPostsCall();
+        this.apiCategoriesCall();
     },
 }
 </script>
